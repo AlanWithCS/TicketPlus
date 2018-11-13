@@ -1,34 +1,88 @@
 (function() {
 
     /**
-     * Variables
-     */
-    var user_id = '1111';
-    var user_fullname = 'John';
-    var lng = -122.08;
-    var lat = 37.38;
-
-    /**
      * Initialize
      */
+	var user_id = "";
+	var password = "";
+	var lat = 0;
+	var lng = 0;
+	
     function init() {
     	// Register event listeners
     	$('login-btn').addEventListener('click', login);
+    	$('signup-btn').addEventListener('click', signup);  // signup
+    	$('submit-btn').addEventListener('click', submitSignUp); //
 		$('nearby-btn').addEventListener('click', loadNearbyItems);
 		$('fav-btn').addEventListener('click', loadFavoriteItems);
 		$('recommend-btn').addEventListener('click', loadRecommendedItems);
 
 		validateSession();
-
-		// onSessionValid({
-		// user_id : '1111',
-		// name : 'John Smith'
-		// });
-
-		var welcomeMsg = $('welcome-msg');
-		welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
 		initGeoLocation();
     }
+    
+    /*
+     * submit the sign up and redirect to log in 
+     */
+    function submitSignUp() {
+    	// save the data to the database
+    	var username = $('username_signup').value;
+		var password = $('password_signup').value;
+		password = md5(username + md5(password));
+		var firstname = $('firstname').value;
+		var lastname = $('lastname').value;
+		
+		// the reqeust parameters
+		var url = './signup';
+		var req = JSON.stringify({
+			user_id: username,
+			password: password,
+			first_name: firstname,
+			last_name: lastname
+		});
+    	
+		ajax('POST', url, req, function(res){
+			var result = JSON.parse(res);
+			if (result.result === 'SUCCESS') {
+				onSessionInvalid();
+			} else {
+				showSignUpError();
+			}			
+		}, showSignUpError);
+    }
+    
+    function showSignUpError() {
+		$('signup-error').innerHTML = 'Existed username or Invalid username/password/firstname/lastname';
+	}
+
+	function clearSignUpError() {
+		$('signup-error').innerHTML = '';
+	}
+    
+    /*
+     * For uses to signup;
+     */
+    function signup() {
+    	// show the signup form
+    	var loginForm = $('login-form');
+    	var signupForm = $('signup-form');
+		var itemNav = $('item-nav');
+		var itemList = $('item-list');
+		var avatar = $('avatar');
+		var welcomeMsg = $('welcome-msg');
+		var logoutBtn = $('logout-link');
+		
+		
+		hideElement(itemNav);
+		hideElement(itemList);
+		hideElement(avatar);
+		hideElement(logoutBtn);
+		hideElement(welcomeMsg);
+		hideElement(loginForm);
+		
+		showElement(signupForm);
+	
+	}
     
     /**
 	 * Session
@@ -48,6 +102,8 @@
 			var result = JSON.parse(res);
 			if (result.result === 'SUCCESS') {
 				onSessionValid(result);
+			} else {
+				onSessionInvalid();
 			}
 		});
 	}
@@ -57,13 +113,14 @@
 		user_fullname = result.name;
 
 		var loginForm = $('login-form');
+		var signupForm = $('signup-form');
 		var itemNav = $('item-nav');
 		var itemList = $('item-list');
 		var avatar = $('avatar');
 		var welcomeMsg = $('welcome-msg');
 		var logoutBtn = $('logout-link');
-
-		welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
+		
+		welcomeMsg.innerHTML = 'Welcome!  ' + user_fullname;
 
 		showElement(itemNav);
 		showElement(itemList);
@@ -71,12 +128,14 @@
 		showElement(welcomeMsg);
 		showElement(logoutBtn, 'inline-block');
 		hideElement(loginForm);
+		hideElement(signupForm);
 
 		initGeoLocation();
 	}
 
 	function onSessionInvalid() {
 		var loginForm = $('login-form');
+		var signupForm = $('signup-form');
 		var itemNav = $('item-nav');
 		var itemList = $('item-list');
 		var avatar = $('avatar');
@@ -88,6 +147,7 @@
 		hideElement(avatar);
 		hideElement(logoutBtn);
 		hideElement(welcomeMsg);
+		hideElement(signupForm);
 
 		showElement(loginForm);
 	}
@@ -345,7 +405,7 @@
         ajax('GET', url + '?' + params, req, function(res) {
             var items = JSON.parse(res);
             if (!items || items.length === 0) {
-                showWarningMessage('No favorite item.');
+                showWarningMessage('No favorite item. Please choose some favorite items.');
             } else {
                 listItems(items);
             }

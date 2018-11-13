@@ -5,7 +5,7 @@
 }
 
 body {
-	background: #434343;
+	background: #5A6062;
 	color: #FFFFFF;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
@@ -21,7 +21,7 @@ ul {
  */
 .top-header {
 	align-items: center;
-	background: #DF574B;
+	background: #1A1C1D;
 	box-shadow: 0px 2px 10px #333333;
 	display: flex;
 	height: 60px;
@@ -51,14 +51,24 @@ ul {
 
 .top-nav a {
 	color: #F9F9F9;
-	font-weight: 400;
 	margin-left: 20px;
 	text-decoration: none;
+}
+
+.top-header a {
+	padding: 10px;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.top-header {
+	font-weight: 500;
 }
 
 #welcome-msg {
 	border-right: 1px solid #FFFFFF;
 	padding-right: 10px;
+	
 }
 
 /**
@@ -76,31 +86,34 @@ ul {
 .container>header {
 	align-items: center;
 	background:
-		url('http://folkartcarsi.com/img/4.jpg')
+		url('https://images.unsplash.com/photo-1524187208855-b6c2f1e78bce?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dac36de48aa7659f45fcdb8188d8eaf4&auto=format&fit=crop&w=1650&q=80')
 		no-repeat 50% 50%;
 	background-size: 100%;
 	display: flex;
-	height: 250px;
+	height: 300px;
 }
 
 .container>header p {
-	border-left: 1px solid #FFFFFF;
-	font-weight: 400;
-	font-size: 2em;
+	border-left: 2px solid #FFFFFF;
+	text-shadow: 2px 2px 1px #595757;
+	font-weight: 500;
+	font-size: 2.4em;
 	line-height: 1em;
-	margin-left: 220px;
+	margin-top: 160px;
+	margin-left: 50px;
 	padding-left: 5px;
 }
 
 .container>header span {
-	color: #FBAF41;
+	color: #2DA3C7;
+	text-shadow: 2px 2px 1px #595757;
 }
 
 /**
  * main section
  */
 .main-section {
-	background: #F3BB43;
+	background: #B6C3C7;
 }
 
 /**
@@ -108,11 +121,11 @@ ul {
  */
 #item-nav {
 	float: left;
-	width: 180px;
+	width: 190px;
 }
 
 .nav-icon {
-	color: #624630;
+	color: #393D40;
 	padding: 20px;
 	text-align: center;
 }
@@ -122,22 +135,23 @@ ul {
  */
 .main-nav-btn {
 	background: none;
-	border-top: 1px solid #FFFFFF;
+	/* border-top: 1px solid #FFFFFF; */
 	color: #FFFFFF;
 	display: block;
 	padding: 20px;
 	text-align: left;
-	text-decoration: none;
+	
 }
 
 .main-nav-btn:hover {
 	background: rgba(255, 255, 255, 0.8);
-	color: #624630;
+	text-decoration: none;
+	color: #393D40;
 }
 
 .main-nav-btn.active {
-	background: #F2EBD9;
-	color: #624630;
+	background: #FCFDFD;
+	color: #393D40;
 }
 
 .main-nav-btn i {
@@ -148,11 +162,11 @@ ul {
  * item list
  */
 #item-list {
-	background: #F2EBD9;
-	color: #624630;
+	background: #FCFDFD;
+	color: #393D40;
 	list-style: none;
-	margin-left: 180px;
-	min-height: 250px;
+	margin-left: 190px;
+	min-height: 256px;
 	padding: 10px;
 }
 
@@ -167,7 +181,7 @@ ul {
  */
 .item {
 	align-items: center;
-	border-bottom: 1px solid #FFFFFF;
+	border-bottom: 1px solid #BAC1C6;
 	display: flex;
 	margin: 10px;
 	padding: 15px;
@@ -196,7 +210,7 @@ ul {
 }
 
 .item-name {
-	color: #624630;
+	color: #393D40;
 	font-weight: 400;
 	text-decoration: none;
 }
@@ -230,21 +244,21 @@ ul {
 }
 
 /**
- * login form
+ * log form
  */
-#login-form {
-  color: #624630;
+.log-form {
+  color: #393D40;
   margin: 0px auto;
   overflow: auto;
   padding: 40px;
   width: 300px;
 }
 
-#login-form label {
+.log-form label {
   display: block;
 }
 
-#login-form input {
+.log-form input {
   border: none;
   display: block;
   margin-bottom: 10px;
@@ -252,17 +266,24 @@ ul {
   width: 100%;
 }
 
-#login-form button {
+.log-form button {
   cursor: pointer;
   float: right;
   padding: 8px 20px;
-  text-align: right;
+  text-align: center;
+  width: 90px;
+  margin: 10px;
 }
 
-#login-error {
+.log-error {
   clear: both;
   color: #990000;
   padding-top: 10px;
+}
+
+#submit-btn {
+	margin: 0px;
+	width: 220px;
 }
 
 
@@ -270,8 +291,8 @@ ul {
  * footer section
  */
 footer {
-	background: #434343;
-	font-size: 0.8em;
+	background: #5A6062;
+	font-size: 0.9em;
 	height: 200px;
 	position: relative;
 }

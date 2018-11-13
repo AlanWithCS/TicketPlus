@@ -11,6 +11,16 @@ public interface DBConnection {
 	 */
 	public void close();
 
+	/* 
+	 * Insert a new user to the database
+	 * @userId: the userId
+	 * @password: user's password
+	 * @firstName: first name of the user
+	 * @lastName: last name of the user
+	 * @return: false (failed) or true (successed)
+	 * */
+	public boolean setNewUser(String userId, String password, String firstName, String lastName);
+	
 	/**
 	 * Insert the favorite items for a user.
 	 * 

@@ -57,6 +57,38 @@ public class MySQLConnection implements DBConnection {
 			e.printStackTrace();
 		}	
 	}
+	
+	@Override
+	// return true if succedd
+	public boolean setNewUser(String userId, String password, String firstName, String lastName) {
+		if (conn == null) { System.err.println("DB Connection failed..."); return false; }
+		try {
+			if (userId == null || password == null) return false;
+			if (userId.length() == 0 || password.length() == 0) return false;
+			String sql = "SELECT user_id FROM users WHERE user_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			ResultSet rs = stmt.executeQuery();
+			// return false if already exists user_id
+			if (rs.next()) { 
+				System.out.println("userID: "+userId+" already exists");
+				return false;}
+			
+			sql = "INSERT INTO users VALUES(?,?,?,?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			stmt.setString(2, password);
+			stmt.setString(3, firstName);
+			stmt.setString(4, lastName);
+			System.out.println("insert success");
+			int affectedRows = stmt.executeUpdate();
+			if (affectedRows == 1) return true;
+			return false;
+		} catch (Exception e) {
+	   		 e.printStackTrace();
+	   	}
+		return false;
+	}
 
 	@Override
 	// the logic is quite similar to the setFavorite items
