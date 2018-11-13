@@ -7,3 +7,6 @@ FrontEnd: CSS/HTML5/JS/AJAX
 BackEnd: Java Servlet (Tomcat)
 Database: MySQL
 
+Demo:
+http://18.144.71.36/Jupiter/
+
