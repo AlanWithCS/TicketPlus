@@ -1,5 +1,5 @@
 # TicketPlus
-TiacketPlus: an Event Search and Ticket Recommendation website
+an Event Search and Ticket Recommendation website
 
 
 Tech Stack:
